@@ -16,6 +16,7 @@ type Server struct {
 	Router              *gin.Engine       `bson:"router"`
 	Client              *mongo.Client     `bson:"client"`
 	WatchlistCollection *mongo.Collection `bson:"watchlist"`
+	TMDBApiKey          string
 }
 
 func initializeClient() (*mongo.Client, error) {
@@ -48,6 +49,11 @@ func initializeWatchlistCollection(client *mongo.Client) *mongo.Collection {
 	return client.Database("db").Collection("watchlist")
 }
 
+func initializeTMDBApiKey() string {
+	godotenv.Load()
+	return os.Getenv("TMDB_API_KEY")
+}
+
 func InitializeServer() (*Server, error) {
 	var server Server
 
@@ -59,5 +65,6 @@ func InitializeServer() (*Server, error) {
 	}
 	server.WatchlistCollection = initializeWatchlistCollection(client)
 	server.Client = client
+	server.TMDBApiKey = initializeTMDBApiKey()
 	return &server, nil
 }

@@ -1,6 +1,7 @@
 package main
 
 import (
+	router "Server/routes"
 	"Server/server"
 	"fmt"
 	"log"
@@ -19,5 +20,6 @@ func main() {
 	} else {
 		fmt.Println(s)
 	}
+	router.ApplyRoutes(s.Router)
 	s.Router.Run()
 }
