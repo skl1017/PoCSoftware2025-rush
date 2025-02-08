@@ -11,13 +11,12 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-const ApiEndpoint = "https://api.themoviedb.org/3/search/movie"
-
 func SearchMovie(c *gin.Context) {
+	apiEndpoint := "https://api.themoviedb.org/3/search/movie"
 	params := url.Values{}
 	params.Add("query", c.Query("moviename"))
 
-	url := ApiEndpoint + "?" + params.Encode()
+	url := apiEndpoint + "?" + params.Encode()
 	fmt.Println("FULL URL: ", url)
 	req, err := http.NewRequest("GET", url, nil)
 	if err != nil {

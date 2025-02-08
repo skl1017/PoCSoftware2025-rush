@@ -9,11 +9,6 @@ import (
 	"github.com/gin-contrib/cors"
 )
 
-type Movie struct {
-	Title string `bson:"title"`
-	Date  int    `bson:"date"`
-}
-
 func main() {
 
 	s, err := server.InitializeServer()
@@ -23,6 +18,6 @@ func main() {
 		fmt.Println(s)
 	}
 	s.Router.Use(cors.Default())
-	router.ApplyRoutes(s.Router)
+	router.ApplyRoutes(s)
 	s.Router.Run()
 }
