@@ -5,6 +5,8 @@ import (
 	"Server/server"
 	"fmt"
 	"log"
+
+	"github.com/gin-contrib/cors"
 )
 
 type Movie struct {
@@ -20,6 +22,7 @@ func main() {
 	} else {
 		fmt.Println(s)
 	}
+	s.Router.Use(cors.Default())
 	router.ApplyRoutes(s.Router)
 	s.Router.Run()
 }
