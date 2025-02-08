@@ -11,3 +11,14 @@ function App() {
 }
 
 export default App;
+// import MovieSearch from "./pages/movie";
+
+// function App() {
+//   return (
+//     <div className="App">
+//       <MovieSearch />
+//     </div>
+//   );
+// }
+
+// export default App;
