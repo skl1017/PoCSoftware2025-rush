@@ -14,15 +14,23 @@ func PostMovie(c *gin.Context, WatchlistCollection *mongo.Collection) {
 
 	err := c.ShouldBindJSON(&movie)
 	if err != nil {
-		log.Fatalln(err)
+		// Utilise un log mais n'arrête pas le programme
+		log.Println("Error binding JSON:", err)
+		// Répond avec une erreur HTTP
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
 	}
 
+	// Insère le film dans la collection MongoDB
 	res, err := WatchlistCollection.InsertOne(context.Background(), movie)
 	if err != nil {
-		log.Fatalln(err)
-		c.JSON(http.StatusBadRequest, gin.H{})
+		// Log l'erreur mais ne termine pas le programme
+		log.Println("Error inserting movie:", err)
+		// Répond avec une erreur HTTP
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Failed to insert movie"})
+		return
 	}
-	c.JSON(http.StatusBadRequest, res)
 
+	// Optionnellement, tu peux envoyer une réponse de succès avec des données
+	c.JSON(http.StatusOK, gin.H{"message": "Movie added successfully", "id": res.InsertedID})
 }
