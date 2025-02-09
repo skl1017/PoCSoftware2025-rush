@@ -52,6 +52,7 @@ useEffect(() => {
 return (
   <div>
     <h1>Movie Search</h1>
+    <br />
     <input
       type="text"
       className="search"
@@ -60,6 +61,9 @@ return (
       placeholder="Enter movie name"
     />
     <button onClick={fetchMovies}>Search</button>
+    <br />
+    <br />
+    <a href="/"><button>Return home</button></a>
 
     {loading && <p>Loading...</p>}
 
@@ -67,7 +71,10 @@ return (
 
     <ul>
       {movies.map((movie) => (
+        
         <div key={movie.id}>
+        <br />
+        --------------------------------------------------------------------------------
           <h2>{movie.title}</h2>
           
           {movie.poster_path && (
@@ -80,13 +87,9 @@ return (
           <p>{movie.overview}</p>
           <br />
           <button onClick={() => addMovie(movie)}>ADD</button>
-          <br />
-          <br />
-          --------------------------------------------------------------------------------
         </div>
       ))}
     </ul>
-    <a href="/"><button>Return home</button></a>
   </div>
 );
 }
