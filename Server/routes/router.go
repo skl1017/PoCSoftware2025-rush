@@ -12,4 +12,7 @@ func ApplyRoutes(server *server.Server) {
 	server.Router.POST("/post", func(c *gin.Context) {
 		controllers.PostMovie(c, server.WatchlistCollection)
 	})
+	server.Router.GET("/watchlist", func(c *gin.Context) {
+		controllers.GetWatchlist(c, server.WatchlistCollection)
+	})
 }
